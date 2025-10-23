@@ -1,0 +1,27 @@
+CREATE TABLE clients (
+    id BIGSERIAL PRIMARY KEY,
+    external_id UUID NOT NULL UNIQUE,
+    client_code VARCHAR(50) UNIQUE NOT NULL,
+    full_name VARCHAR(200) NOT NULL,
+    email VARCHAR(255),
+    phone VARCHAR(30),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE TABLE claims (
+    id BIGSERIAL PRIMARY KEY,
+    external_id UUID NOT NULL UNIQUE,
+    client_id BIGINT NOT NULL REFERENCES clients(id) ON DELETE CASCADE,
+    claim_type VARCHAR(50) NOT NULL,
+    status VARCHAR(30) NOT NULL,
+    amount DECIMAL(12,2) DEFAULT 0.00 NOT NULL,
+    currency CHAR(3) DEFAULT 'INR' NOT NULL,
+    submitted_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    resolved_date TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE INDEX idx_claims_client ON claims(client_id);
+CREATE INDEX idx_claims_status ON claims(status);
