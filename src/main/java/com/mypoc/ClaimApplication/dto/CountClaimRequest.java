@@ -1,31 +1,10 @@
 package com.mypoc.ClaimApplication.dto;
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import lombok.Data;
 
-@JacksonXmlRootElement(localName = "countClaimRequest")
+@Data
 public class CountClaimRequest {
-
-    @JacksonXmlProperty(localName = "clientCode")
-    private String clientCode;
-
-    @JacksonXmlProperty(localName = "filters")
-    private ClaimFilter filters;
-
-    // Getters and Setters
-    public String getClientCode() {
-        return clientCode;
-    }
-
-    public void setClientCode(String clientCode) {
-        this.clientCode = clientCode;
-    }
-
-    public ClaimFilter getFilters() {
-        return filters;
-    }
-
-    public void setFilters(ClaimFilter filters) {
-        this.filters = filters;
-    }
+    private String clientCd;
+    private String statusCd;
+    private String claimType;
 }
