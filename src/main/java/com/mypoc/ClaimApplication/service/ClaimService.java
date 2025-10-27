@@ -5,16 +5,28 @@ import com.mypoc.ClaimApplication.entity.Claim;
 
 import java.util.List;
 
+/**
+ * Defines business operations for Claims.
+ *
+ * <p>Responsibilities include counting and retrieving claim records
+ * based on input criteria.
+ */
 public interface ClaimService {
 
     /**
-     * Count and optionally list claims based on claimType and statusCd.
+     * Counts total claims filtered by claimType and optionally statusCd.
      *
-     * @param claimType the type of claim (mandatory)
-     * @param statusCd  optional status code filter
-     * @return response containing claimType, statusCd, count, and status message
+     * @param claimType Claim type filter (mandatory)
+     * @param statusCd  Status code filter (optional)
+     * @return Aggregated {@link CountClaimResponse} with claim count and summary details
      */
     CountClaimResponse countClaims(String claimType, String statusCd);
-    // ✅ Fetch all claims of a particular claimType
+
+    /**
+     * Retrieves all claims based on claimType.
+     *
+     * @param claimType Claim type filter
+     * @return List of {@link Claim} entities
+     */
     List<Claim> getClaimsByType(String claimType);
 }
