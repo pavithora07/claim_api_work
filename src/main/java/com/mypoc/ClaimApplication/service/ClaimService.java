@@ -1,7 +1,7 @@
 package com.mypoc.ClaimApplication.service;
 
-import com.mypoc.ClaimApplication.dto.CountClaimResponse;
+import com.mypoc.ClaimApplication.dto.ClaimCounts;
 
 public interface ClaimService {
-    CountClaimResponse getAllClaimCounts();
+    ClaimCounts getClaimCountsByClaimStatus();
 }

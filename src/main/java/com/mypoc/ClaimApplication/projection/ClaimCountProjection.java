@@ -1,4 +1,4 @@
-package com.mypoc.ClaimApplication.dto;
+package com.mypoc.ClaimApplication.projection;
 
 public interface ClaimCountProjection {
     String getClaimType();
