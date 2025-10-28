@@ -27,15 +27,14 @@ public class ClaimRepositoryCustomImpl implements ClaimRepositoryCustom {
 
         String sql = """
     SELECT 
+        CLAIM_STREAM,
         CLAIM_TYPE,
-        STATUS_CD,
-        COALESCE(CLAIM_STREAM, ' ') AS CLAIM_STREAM,
-        COUNT(MPI_CLAIM_ID) AS CLAIM_COUNT
+        COUNT(*) AS CLAIM_COUNT
     FROM CLAIM
-    WHERE STATUS_CD = :statusCd
-    GROUP BY CLAIM_TYPE, STATUS_CD, CLAIM_STREAM
-    ORDER BY CLAIM_STREAM ASC
+    GROUP BY CLAIM_STREAM, CLAIM_TYPE
+    ORDER BY CLAIM_STREAM, CLAIM_TYPE;
 """;
+
 
 
         Query query = entityManager.createNativeQuery(sql);
