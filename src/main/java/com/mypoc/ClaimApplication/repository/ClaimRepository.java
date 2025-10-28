@@ -1,9 +1,20 @@
 package com.mypoc.ClaimApplication.repository;
 
+import com.mypoc.ClaimApplication.entity.Claim;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-import com.mypoc.ClaimApplication.dto.ClaimCounts;
+import java.util.List;
 
-public interface ClaimRepository {
-    Boolean getClaimCountsByClaimStatus(ClaimCounts claimCounts);
+@Repository
+public interface ClaimRepository extends JpaRepository<Claim, String> {
+
+    @Query("""
+        SELECT c.claimStream, c.claimType, COUNT(c.mpiClaimId)
+        FROM Claim c
+        GROUP BY c.claimStream, c.claimType
+        ORDER BY c.claimStream ASC
+    """)
+    List<Object[]> getAllClaimCounts();
 }
-
